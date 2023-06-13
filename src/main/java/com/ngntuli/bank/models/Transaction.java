@@ -59,7 +59,7 @@ public class Transaction {
 
 	public void setAmount(User sender, User recipient, Integer amount) {
 		if (sender.getBalance() < 0 || sender.getBalance() < amount) {
-			System.err.println("Transaction failed!");
+			System.err.println("Transaction Failed! for user: " + sender.getName());
 		} else {
 			sender.setBalance(sender.getBalance() - amount);
 			recipient.setBalance(recipient.getBalance() + amount);
