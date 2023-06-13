@@ -5,5 +5,5 @@
 	<groupId>com.ngntuli</groupId>
 	<artifactId>BankApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>money transfer system</name>
+	<name>bank</name>
 </project>
