@@ -20,19 +20,19 @@ public class Transaction {
 		this.id = id;
 	}
 
-	public String getRecipient() {
+	public User getRecipient() {
 		return recipient;
 	}
 
-	public void setRecipient(String recipient) {
+	public void setRecipient(User recipient) {
 		this.recipient = recipient;
 	}
 
-	public String getSender() {
+	public User getSender() {
 		return sender;
 	}
 
-	public void setSender(String sender) {
+	public void setSender(User sender) {
 		this.sender = sender;
 	}
 
