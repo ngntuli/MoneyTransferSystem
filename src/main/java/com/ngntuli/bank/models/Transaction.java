@@ -2,10 +2,9 @@ package com.ngntuli.bank.models;
 
 import java.util.UUID;
 
+import com.ngntuli.bank.utilities.TransferCategory;
+
 public class Transaction {
-	public enum TransferCategory {
-		DEBIT, CREDIT
-	}
 
 	private UUID id;
 	private String recipient;
