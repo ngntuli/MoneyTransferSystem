@@ -5,6 +5,18 @@ public class User {
 	private String name;
 	private Integer balance;
 
+	public User(Integer id, String name, Integer balance) {
+		this.id = id;
+		this.name = name;
+
+		if (balance < 0) {
+			this.balance = 0;
+			System.err.println("Incorrect balance: " + balance + " for user: " + name);
+		} else {
+			this.balance = balance;
+		}
+	}
+
 	public Integer getId() {
 		return id;
 	}
