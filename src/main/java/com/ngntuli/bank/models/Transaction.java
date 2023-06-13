@@ -7,8 +7,8 @@ import com.ngntuli.bank.utilities.TransferCategory;
 public class Transaction {
 
 	private UUID id;
-	private String recipient;
-	private String sender;
+	private User recipient;
+	private User sender;
 	private TransferCategory transferCategory;
 	private Integer amount;
 
