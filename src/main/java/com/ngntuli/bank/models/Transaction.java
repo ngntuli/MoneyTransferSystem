@@ -11,6 +11,7 @@ public class Transaction {
 	private User recipient;
 	private TransferCategory transferCategory;
 	private Integer amount;
+	private boolean transferStatus = false;
 
 	public Transaction(User sender, User recipient, Integer amount) {
 		this.id = UUID.randomUUID();
@@ -50,7 +51,7 @@ public class Transaction {
 		} else {
 			this.transferCategory = TransferCategory.CREDIT;
 		}
-
+		this.amount = Math.abs(amount);
 	}
 
 	public Integer getAmount() {
@@ -58,41 +59,62 @@ public class Transaction {
 	}
 
 	public void setAmount(User sender, User recipient, Integer amount) {
-		if (sender.getBalance() < 0 || sender.getBalance() < amount) {
-			System.err.println("Transaction Failed! for user: " + sender.getName());
+		if ((this.transferCategory == TransferCategory.DEBIT && sender.getBalance() < amount)
+				|| (this.transferCategory == TransferCategory.CREDIT && sender.getBalance() < -amount)) {
+			System.err.println("Transaction [id=" + this.id + "] Failed!\n");
 		} else {
+			transferStatus = true;
 			sender.setBalance(sender.getBalance() - amount);
 			recipient.setBalance(recipient.getBalance() + amount);
 		}
-		this.amount = amount;
+
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder trans = new StringBuilder();
+		if (transferStatus) {
+			if (this.transferCategory == TransferCategory.DEBIT) {
+				trans.append("Transaction [");
+				trans.append(sender.getName());
+				trans.append(" -> ");
+				trans.append(recipient.getName());
+				trans.append(", -");
+				trans.append(this.amount);
+				trans.append(", OUTCOME, ");
+				trans.append(this.id);
+				trans.append("]\n");
 
-		if (this.transferCategory == TransferCategory.DEBIT) {
-			trans.append("Transaction [");
-			trans.append(sender.getName());
-			trans.append(" -> ");
-			trans.append(recipient.getName());
-			trans.append(", -");
-			trans.append(this.amount);
-			trans.append(", OUTCOME, ");
-			trans.append(this.id);
-			trans.append("]\n");
-			this.transferCategory = TransferCategory.CREDIT;
-		}
-		if (this.transferCategory == TransferCategory.CREDIT) {
-			trans.append("Transaction [");
-			trans.append(recipient.getName());
-			trans.append(" -> ");
-			trans.append(sender.getName());
-			trans.append(", +");
-			trans.append(this.amount);
-			trans.append(", INCOME, ");
-			trans.append(this.id);
-			trans.append("]\n");
+				trans.append("Transaction [");
+				trans.append(recipient.getName());
+				trans.append(" -> ");
+				trans.append(sender.getName());
+				trans.append(", +");
+				trans.append(this.amount);
+				trans.append(", INCOME, ");
+				trans.append(this.id);
+				trans.append("]\n");
+			} else {
+				trans.append("Transaction [");
+				trans.append(recipient.getName());
+				trans.append(" -> ");
+				trans.append(sender.getName());
+				trans.append(", -");
+				trans.append(this.amount);
+				trans.append(", OUTCOME, ");
+				trans.append(this.id);
+				trans.append("]\n");
+
+				trans.append("Transaction [");
+				trans.append(sender.getName());
+				trans.append(" -> ");
+				trans.append(recipient.getName());
+				trans.append(", +");
+				trans.append(this.amount);
+				trans.append(", INCOME, ");
+				trans.append(this.id);
+				trans.append("]\n");
+			}
 		}
 
 		return trans.toString();
