@@ -34,7 +34,7 @@ public class User {
 	public void setBalance(Integer balance) {
 		if (balance < 0) {
 			this.balance = 0;
-			System.err.println("Cannot Set Negative Balance:R" + balance + " for user: " + this.name);
+			System.err.println("Cannot Set Negative Balance: " + balance + " for user: " + this.name);
 		} else {
 			this.balance = balance;
 		}
