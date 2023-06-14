@@ -45,7 +45,7 @@ public class Transaction {
 	}
 
 	public void setTransferCategory(Integer amount) {
-		if (amount < 0) {
+		if (amount > 0) {
 			this.transferCategory = TransferCategory.DEBIT;
 		} else {
 			this.transferCategory = TransferCategory.CREDIT;
@@ -65,6 +65,12 @@ public class Transaction {
 			recipient.setBalance(recipient.getBalance() + amount);
 		}
 		this.amount = amount;
+	}
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", sender=" + sender + ", recipient=" + recipient + ", transferCategory="
+				+ transferCategory + ", amount=" + amount + "]";
 	}
 
 }
