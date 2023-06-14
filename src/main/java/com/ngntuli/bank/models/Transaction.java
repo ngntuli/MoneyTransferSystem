@@ -60,7 +60,7 @@ public class Transaction {
 
 	public void setAmount(User sender, User recipient, Integer amount) {
 		if ((this.transferCategory == TransferCategory.DEBIT && sender.getBalance() < amount)
-				|| (this.transferCategory == TransferCategory.CREDIT && sender.getBalance() < -amount)) {
+				|| (this.transferCategory == TransferCategory.CREDIT && sender.getBalance() < amount)) {
 			System.err.println("Transaction [id=" + this.id + "] Failed!\n");
 		} else {
 			transferStatus = true;
