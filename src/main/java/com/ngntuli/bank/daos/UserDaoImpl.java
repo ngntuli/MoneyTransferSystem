@@ -12,12 +12,14 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void addUser(User user) {
-		if (users.contains(user)) {
-			throw new UserAlreadyExistsException("Exception: User already exist - " + user);
-		} else {
+		User userFound = findUserByName(user.getName());
+		if (userFound == null) {
 			users.add(user);
 			System.out.println("User added: " + user.getName());
+		} else {
+			throw new UserAlreadyExistsException("Exception: User already exist - " + user);
 		}
+
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class UserDaoImpl implements UserDao {
 				return user;
 			}
 		}
-		throw new UserNotFoundException("Exception: User Not Found by Name: " + name);
+		return null;
 	}
 
 	@Override
