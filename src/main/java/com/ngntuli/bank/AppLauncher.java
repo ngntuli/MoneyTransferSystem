@@ -35,7 +35,7 @@ public class AppLauncher {
 		printUsers(users);
 
 		Transaction[] transactions = new Transaction[2];
-		transactions[0] = new Transaction(users[1], users[0], -100);
+		transactions[0] = new Transaction(users[1], users[0], 500);
 		transactions[1] = new Transaction(users[2], users[0], 100);
 		printTransactions(transactions);
 		printUsers(users);
