@@ -7,12 +7,12 @@ public class UserIdsGenerator {
 	private UserIdsGenerator() {
 	}
 
-	public static int generateId() {
+	public int generateId() {
 		id++;
 		return id;
 	}
 
-	public static int getId() {
+	public int getId() {
 		return id;
 	}
 
