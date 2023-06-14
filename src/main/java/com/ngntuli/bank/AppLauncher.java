@@ -29,11 +29,6 @@ public class AppLauncher {
 	}
 
 	public static void main(String[] args) {
-
-		User[] users = new User[3];
-		users[0] = new User("Charlotte", 100);
-		users[1] = new User("Nkosinathi", 1_000);
-		users[2] = new User("HackerOne", -1_000);
 		printUsers(users);
 
 		Transaction[] transactions = new Transaction[3];
