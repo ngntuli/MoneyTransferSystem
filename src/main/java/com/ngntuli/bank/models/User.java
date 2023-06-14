@@ -1,22 +1,20 @@
 package com.ngntuli.bank.models;
 
+import com.ngntuli.bank.databases.UserIdsGenerator;
+
 public class User {
-	private Integer id;
+	private int id;
 	private String name;
 	private Integer balance;
 
-	public User(Integer id, String name, Integer balance) {
-		this.id = id;
+	public User(String name, Integer balance) {
+		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
 		setBalance(balance);
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {
