@@ -6,7 +6,6 @@ import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.utilities.TransferCategory;
 
 public class AppLauncher {
-	private static int userId = 1;
 
 	private static void printUsers(User[] users) {
 		System.out.println("-".repeat(66));
