@@ -11,13 +11,12 @@ public class Transaction {
 	private User recipient;
 	private TransferCategory transferCategory;
 	private Integer amount;
-	private boolean transferStatus = false;
 
-	public Transaction(User sender, User recipient, Integer amount) {
+	public Transaction(User sender, User recipient, TransferCategory transferCategory, Integer amount) {
 		this.id = UUID.randomUUID();
 		this.sender = sender;
 		this.recipient = recipient;
-		setTransferCategory(amount);
+		setTransferCategory(transferCategory);
 		setAmount(sender, recipient, amount);
 	}
 
@@ -45,13 +44,8 @@ public class Transaction {
 		return transferCategory;
 	}
 
-	public void setTransferCategory(Integer amount) {
-		if (amount > 0) {
-			this.transferCategory = TransferCategory.DEBIT;
-		} else {
-			this.transferCategory = TransferCategory.CREDIT;
-		}
-		this.amount = Math.abs(amount);
+	public void setTransferCategory(TransferCategory transferCategory) {
+		this.transferCategory = transferCategory;
 	}
 
 	public Integer getAmount() {
@@ -59,13 +53,16 @@ public class Transaction {
 	}
 
 	public void setAmount(User sender, User recipient, Integer amount) {
-		if ((this.transferCategory == TransferCategory.DEBIT && sender.getBalance() < amount)
-				|| (this.transferCategory == TransferCategory.CREDIT && sender.getBalance() < amount)) {
+		this.amount = amount;
+		if ((this.transferCategory.equals(TransferCategory.DEBIT) && sender.getBalance() < amount)
+				|| (this.transferCategory.equals(TransferCategory.CREDIT) && recipient.getBalance() < amount)) {
 			System.err.println("Transaction [id=" + this.id + "] Failed!\n");
-		} else {
-			transferStatus = true;
+		} else if (transferCategory.equals(TransferCategory.DEBIT)) {
 			sender.setBalance(sender.getBalance() - amount);
 			recipient.setBalance(recipient.getBalance() + amount);
+		} else {
+			recipient.setBalance(recipient.getBalance() - amount);
+			sender.setBalance(sender.getBalance() + amount);
 		}
 
 	}
@@ -73,48 +70,47 @@ public class Transaction {
 	@Override
 	public String toString() {
 		StringBuilder trans = new StringBuilder();
-		if (transferStatus) {
-			if (this.transferCategory == TransferCategory.DEBIT) {
-				trans.append("Transaction [");
-				trans.append(sender.getName());
-				trans.append(" -> ");
-				trans.append(recipient.getName());
-				trans.append(", -");
-				trans.append(this.amount);
-				trans.append(", OUTCOME, ");
-				trans.append(this.id);
-				trans.append("]\n");
 
-				trans.append("Transaction [");
-				trans.append(recipient.getName());
-				trans.append(" -> ");
-				trans.append(sender.getName());
-				trans.append(", +");
-				trans.append(this.amount);
-				trans.append(", INCOME, ");
-				trans.append(this.id);
-				trans.append("]\n");
-			} else {
-				trans.append("Transaction [");
-				trans.append(recipient.getName());
-				trans.append(" -> ");
-				trans.append(sender.getName());
-				trans.append(", -");
-				trans.append(this.amount);
-				trans.append(", OUTCOME, ");
-				trans.append(this.id);
-				trans.append("]\n");
+		if (this.transferCategory.equals(TransferCategory.DEBIT)) {
+			trans.append("Transaction [");
+			trans.append(sender.getName());
+			trans.append(" -> ");
+			trans.append(recipient.getName());
+			trans.append(", -");
+			trans.append(this.amount);
+			trans.append(", OUTCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
 
-				trans.append("Transaction [");
-				trans.append(sender.getName());
-				trans.append(" -> ");
-				trans.append(recipient.getName());
-				trans.append(", +");
-				trans.append(this.amount);
-				trans.append(", INCOME, ");
-				trans.append(this.id);
-				trans.append("]\n");
-			}
+			trans.append("Transaction [");
+			trans.append(recipient.getName());
+			trans.append(" -> ");
+			trans.append(sender.getName());
+			trans.append(", +");
+			trans.append(this.amount);
+			trans.append(", INCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
+		} else {
+			trans.append("Transaction [");
+			trans.append(recipient.getName());
+			trans.append(" -> ");
+			trans.append(sender.getName());
+			trans.append(", -");
+			trans.append(this.amount);
+			trans.append(", OUTCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
+
+			trans.append("Transaction [");
+			trans.append(sender.getName());
+			trans.append(" -> ");
+			trans.append(recipient.getName());
+			trans.append(", +");
+			trans.append(this.amount);
+			trans.append(", INCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
 		}
 
 		return trans.toString();
