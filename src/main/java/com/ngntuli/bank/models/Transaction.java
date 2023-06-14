@@ -69,8 +69,33 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", sender=" + sender + ", recipient=" + recipient + ", transferCategory="
-				+ transferCategory + ", amount=" + amount + "]";
+		StringBuilder trans = new StringBuilder();
+
+		if (this.transferCategory == TransferCategory.DEBIT) {
+			trans.append("Transaction [");
+			trans.append(sender.getName());
+			trans.append(" -> ");
+			trans.append(recipient.getName());
+			trans.append(", -");
+			trans.append(this.amount);
+			trans.append(", OUTCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
+			this.transferCategory = TransferCategory.CREDIT;
+		}
+		if (this.transferCategory == TransferCategory.CREDIT) {
+			trans.append("Transaction [");
+			trans.append(recipient.getName());
+			trans.append(" -> ");
+			trans.append(sender.getName());
+			trans.append(", +");
+			trans.append(this.amount);
+			trans.append(", INCOME, ");
+			trans.append(this.id);
+			trans.append("]\n");
+		}
+
+		return trans.toString();
 	}
 
 }
