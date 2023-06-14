@@ -1,7 +1,9 @@
 package com.ngntuli.bank;
 
+import com.ngntuli.bank.databases.UserIdsGenerator;
 import com.ngntuli.bank.models.Transaction;
 import com.ngntuli.bank.models.User;
+import com.ngntuli.bank.utilities.TransferCategory;
 
 public class AppLauncher {
 	private static int userId = 1;
@@ -13,6 +15,7 @@ public class AppLauncher {
 		for (User user : users) {
 			System.out.println(user);
 		}
+		System.out.println("Last generated Id: " + UserIdsGenerator.getInstance().getId());
 		System.out.println("-".repeat(66));
 	}
 
@@ -29,14 +32,15 @@ public class AppLauncher {
 	public static void main(String[] args) {
 
 		User[] users = new User[3];
-		users[0] = new User(userId++, "Charlotte", 100);
-		users[1] = new User(userId++, "Nkosinathi", 1_000);
-		users[2] = new User(userId++, "HackerOne", -1_000);
+		users[0] = new User("Charlotte", 100);
+		users[1] = new User("Nkosinathi", 1_000);
+		users[2] = new User("HackerOne", -1_000);
 		printUsers(users);
 
-		Transaction[] transactions = new Transaction[2];
-		transactions[0] = new Transaction(users[1], users[0], 500);
-		transactions[1] = new Transaction(users[2], users[0], 100);
+		Transaction[] transactions = new Transaction[3];
+		transactions[0] = new Transaction(users[1], users[0], TransferCategory.DEBIT, 500);
+		transactions[1] = new Transaction(users[2], users[0], TransferCategory.CREDIT, 40);
+		transactions[2] = new Transaction(users[2], users[0], TransferCategory.DEBIT, 100);
 		printTransactions(transactions);
 		printUsers(users);
 
