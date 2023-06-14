@@ -7,8 +7,8 @@ import com.ngntuli.bank.utilities.TransferCategory;
 public class Transaction {
 
 	private UUID id;
-	private User recipient;
 	private User sender;
+	private User recipient;
 	private TransferCategory transferCategory;
 	private Integer amount;
 
@@ -24,20 +24,20 @@ public class Transaction {
 		return id;
 	}
 
-	public User getRecipient() {
-		return recipient;
-	}
-
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
-	}
-
 	public User getSender() {
 		return sender;
 	}
 
 	public void setSender(User sender) {
 		this.sender = sender;
+	}
+
+	public User getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 
 	public TransferCategory getTransferCategory() {
