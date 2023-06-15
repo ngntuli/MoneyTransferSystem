@@ -16,8 +16,8 @@ public class Transaction {
 		this.id = UUID.randomUUID();
 		this.sender = sender;
 		this.recipient = recipient;
-		setTransferCategory(transferCategory);
-		setAmount(sender, recipient, amount);
+		this.transferCategory = transferCategory;
+		this.amount = amount;
 	}
 
 	public UUID getId() {
@@ -52,19 +52,8 @@ public class Transaction {
 		return amount;
 	}
 
-	public void setAmount(User sender, User recipient, Integer amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
-		if ((this.transferCategory.equals(TransferCategory.DEBIT) && sender.getBalance() < amount)
-				|| (this.transferCategory.equals(TransferCategory.CREDIT) && recipient.getBalance() < amount)) {
-			System.err.println("Transaction [id=" + this.id + "] Failed!\n");
-		} else if (transferCategory.equals(TransferCategory.DEBIT)) {
-			sender.setBalance(sender.getBalance() - amount);
-			recipient.setBalance(recipient.getBalance() + amount);
-		} else {
-			recipient.setBalance(recipient.getBalance() - amount);
-			sender.setBalance(sender.getBalance() + amount);
-		}
-
 	}
 
 	@Override
