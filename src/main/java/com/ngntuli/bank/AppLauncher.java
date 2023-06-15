@@ -81,16 +81,24 @@ public class AppLauncher {
 
 		System.out.println("Number of users - " + users.size());
 		printUsersByIds(users);
+
+		System.out.println("Try to get User with non existing Name: SS");
 		if (users.findUserByName("SS") == null) {
 			throw new UserNotFoundException("Exception: User Not Found by Name: SS");
 		} else {
-			System.out.println("Get by name S - " + users.findUserByName("S"));
+			System.out.println("Get by name S - " + users.findUserByName("SS"));
 		}
-		// System.out.println("Try to get User with non existing ID: 150");
-		// System.out.println(users.findUserByID(150));
-		// System.out.println("Try to add existing User: N");
-		// users.addUser(new User("N", 100));
-		// System.out.println("Number of users - " + users.size());
+
+		System.out.println("Try to get User with non existing ID: 150");
+		if (users.findUserByID(150) == null) {
+			throw new UserNotFoundException("Exception: User Not Found by ID: 150");
+		} else {
+			System.out.println(users.findUserByID(150));
+		}
+
+		System.out.println("Try to add existing User: N");
+		users.addUser(new User("N", 100));
+		System.out.println("Number of users - " + users.size());
 
 //		Transaction[] transactions = new Transaction[3];
 //		transactions[0] = new Transaction(users.findUserByName("S"), users.findUserByName("P"), TransferCategory.DEBIT,
