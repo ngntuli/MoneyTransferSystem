@@ -1,16 +1,20 @@
 package com.ngntuli.bank.models;
 
+import com.ngntuli.bank.daos.TransactionDao;
+import com.ngntuli.bank.daos.TransactionDaoImpl;
 import com.ngntuli.bank.databases.UserIdsGenerator;
 
 public class User {
 	private int id;
 	private String name;
 	private Integer balance;
+	private TransactionDao transactions;
 
 	public User(String name, Integer balance) {
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
 		setBalance(balance);
+		this.setTransactions(new TransactionDaoImpl());
 	}
 
 	public int getId() {
@@ -36,6 +40,14 @@ public class User {
 		} else {
 			this.balance = balance;
 		}
+	}
+
+	public TransactionDao getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(TransactionDao transactions) {
+		this.transactions = transactions;
 	}
 
 	@Override
