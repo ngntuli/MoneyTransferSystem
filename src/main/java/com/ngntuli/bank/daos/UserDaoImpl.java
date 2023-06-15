@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
 				return user;
 			}
 		}
-		throw new UserNotFoundException("Exception: User Not Found by ID: " + id);
+		return null;
 	}
 
 	@Override
