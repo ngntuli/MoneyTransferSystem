@@ -1,14 +1,14 @@
 package com.ngntuli.bank.daos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.validators.UserAlreadyExistsException;
-import com.ngntuli.bank.validators.UserNotFoundException;
 
 public class UserDaoImpl implements UserDao {
 
-	private static final ArrayList<User> users = new ArrayList<>();
+	private static final List<User> users = new ArrayList<>();
 
 	@Override
 	public void addUser(User user) {
