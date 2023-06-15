@@ -1,5 +1,8 @@
 package com.ngntuli.bank.models;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.ngntuli.bank.daos.TransactionDao;
 import com.ngntuli.bank.daos.TransactionDaoImpl;
 import com.ngntuli.bank.databases.UserIdsGenerator;
@@ -8,13 +11,13 @@ public class User {
 	private int id;
 	private String name;
 	private Integer balance;
-	private TransactionDao transactions;
+	private List<TransactionDao> transactions;
 
 	public User(String name, Integer balance) {
+		this.transactions = new LinkedList<>();
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
 		setBalance(balance);
-		setTransactions(new TransactionDaoImpl());
 	}
 
 	public int getId() {
@@ -42,11 +45,11 @@ public class User {
 		}
 	}
 
-	public TransactionDao getTransactions() {
+	public List<TransactionDao> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(TransactionDao transactions) {
+	public void setTransactions(List<TransactionDao> transactions) {
 		this.transactions = transactions;
 	}
 
