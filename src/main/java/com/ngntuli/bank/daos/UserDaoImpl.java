@@ -11,13 +11,13 @@ public class UserDaoImpl implements UserDao {
 	private static final List<User> users = new ArrayList<>();
 
 	@Override
-	public void add(User user) {
+	public boolean add(User user) {
 		User userFound = find(user.getName());
 		if (userFound == null) {
 			users.add(user);
-			System.out.println("User added: " + user.getName());
+			return true;
 		} else {
-			throw new UserAlreadyExistsException("Exception: User already exist - " + user);
+			return false;
 		}
 
 	}
