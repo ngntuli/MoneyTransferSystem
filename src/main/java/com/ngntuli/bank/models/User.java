@@ -11,7 +11,7 @@ public class User {
 	private int id;
 	private String name;
 	private Integer balance;
-	private List<TransactionDao> transactions;
+	private List<Transaction> transactions;
 
 	public User(String name, Integer balance) {
 		this.transactions = new LinkedList<>();
@@ -45,11 +45,11 @@ public class User {
 		}
 	}
 
-	public List<TransactionDao> getTransactions() {
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(List<TransactionDao> transactions) {
+	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
 
