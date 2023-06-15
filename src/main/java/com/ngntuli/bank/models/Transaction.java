@@ -12,7 +12,8 @@ public class Transaction {
 	private TransferCategory transferCategory;
 	private Integer amount;
 
-	public Transaction() {
+	public Transaction(UUID id) {
+		this.id = id;
 	}
 
 	public Transaction(User sender, User recipient, TransferCategory transferCategory, Integer amount) {
