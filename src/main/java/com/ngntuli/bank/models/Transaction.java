@@ -12,6 +12,9 @@ public class Transaction {
 	private TransferCategory transferCategory;
 	private Integer amount;
 
+	public Transaction() {
+	}
+
 	public Transaction(User sender, User recipient, TransferCategory transferCategory, Integer amount) {
 		this.id = UUID.randomUUID();
 		this.sender = sender;
