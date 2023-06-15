@@ -14,7 +14,7 @@ public class User {
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
 		setBalance(balance);
-		this.setTransactions(new TransactionDaoImpl());
+		setTransactions(new TransactionDaoImpl());
 	}
 
 	public int getId() {
