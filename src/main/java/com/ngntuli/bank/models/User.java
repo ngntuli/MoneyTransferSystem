@@ -10,10 +10,10 @@ import com.ngntuli.bank.databases.UserIdsGenerator;
 public class User {
 	private int id;
 	private String name;
-	private Integer balance;
+	private int balance;
 	private List<Transaction> transactions;
 
-	public User(String name, Integer balance) {
+	public User(String name, int balance) {
 		this.transactions = new LinkedList<>();
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
@@ -32,11 +32,11 @@ public class User {
 		this.name = name;
 	}
 
-	public Integer getBalance() {
+	public int getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Integer balance) {
+	public void setBalance(int balance) {
 		if (balance < 0) {
 			this.balance = 0;
 			System.err.println("Cannot Set Negative Balance: " + balance + " for user: " + this.name);
