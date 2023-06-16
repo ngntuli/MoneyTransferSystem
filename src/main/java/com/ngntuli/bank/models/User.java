@@ -11,10 +11,9 @@ public class User {
 	private int id;
 	private String name;
 	private int balance;
-	private List<Transaction> transactions;
+	private static final List<Transaction> transactions = new LinkedList<>();;
 
 	public User(String name, int balance) {
-		this.transactions = new LinkedList<>();
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
 		setBalance(balance);
@@ -47,10 +46,6 @@ public class User {
 
 	public List<Transaction> getTransactions() {
 		return transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
 	}
 
 	@Override
