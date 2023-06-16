@@ -5,15 +5,15 @@ import java.util.List;
 import com.ngntuli.bank.models.User;
 
 public interface UserDao {
-	boolean add(User user);
+	boolean addByUser(User user);
 
-	User find(int id);
+	User findById(int id);
 
-	User find(String name);
+	User findByName(String name);
 
-	User find(User user);
+	User findByUser(User user);
 
-	List<User> findAll();
+	List<User> listAllUsers();
 
 	int size();
 }
