@@ -1,5 +1,7 @@
 package com.ngntuli.bank;
 
+import java.util.UUID;
+
 import com.ngntuli.bank.daos.TransactionDao;
 import com.ngntuli.bank.daos.TransactionDaoImpl;
 import com.ngntuli.bank.daos.UserDao;
@@ -43,13 +45,6 @@ public class AppLauncher {
 			System.out.println(transaction);
 		}
 		System.out.println();
-	}
-
-	public static void createTransaction(TransactionDao transactionDao, User sender, User recipient, int amount) {
-		Transaction tr1 = new Transaction(sender, recipient, TransferCategory.DEBIT, amount);
-		transactionDao.add(tr1);
-		Transaction tr2 = new Transaction(sender, recipient, TransferCategory.CREDIT, amount);
-		transactionDao.add(tr2);
 	}
 
 	public static void main(String[] args) {
@@ -124,59 +119,56 @@ public class AppLauncher {
 		User user1 = new User("Charlotte", 1000);
 		User user2 = new User("Nkosinathi", 1000);
 
+		UserDao users = new UserDaoImpl();
+		users.add(user1);
+		users.add(user2);
+
+		System.out.println("-".repeat(66));
+		System.out.println("USERS: ");
 		System.out.println("-".repeat(66));
 		System.out.println("Charlotte: " + user1 + "\nCharlotte list: \n" + user1.getTransactions());
 		System.out.println("Nkosinathi: " + user2 + "\nNkosinathi list: \n" + user2.getTransactions());
 		System.out.println("-".repeat(66));
 
 		System.out.println("\nLET'S CREATE TRANSACTIONS:");
+		System.out.println("-".repeat(66));
 		TransactionDao transactionDao = new TransactionDaoImpl();
 		transactionDao.add(new Transaction(user1, user2, TransferCategory.DEBIT, 200));
-//		createTransaction(transactionDao, user1, user2, 200);
-//		createTransaction(transactionDao, user2, user1, 100);
-//		createTransaction(transactionDao, user2, user1, 150);
-//		createTransaction(transactionDao, user2, user1, 50);
+		transactionDao.add(new Transaction(user1, user2, TransferCategory.CREDIT, 100));
+		transactionDao.add(new Transaction(user1, user2, TransferCategory.CREDIT, 150));
+		transactionDao.add(new Transaction(user1, user2, TransferCategory.CREDIT, 500));
 
 		System.out.println("Charlotte: " + user1 + "\nCharlotte list: \n" + user1.getTransactions());
+		System.out.println("-".repeat(166));
 		System.out.println("Nkosinathi: " + user2 + "\nNkosinathi list: \n" + user2.getTransactions());
+		System.out.println("-".repeat(166));
 
-//		public void setAmount(User sender, User recipient, Integer amount) {
-//			this.amount = amount;
-//			if ((this.transferCategory.equals(TransferCategory.DEBIT) && sender.getBalance() < amount)
-//					|| (this.transferCategory.equals(TransferCategory.CREDIT) && recipient.getBalance() < amount)) {
-//				System.err.println("Transaction [id=" + this.id + "] Failed!\n");
-//			} else if (transferCategory.equals(TransferCategory.DEBIT)) {
-//				sender.setBalance(sender.getBalance() - amount);
-//				recipient.setBalance(recipient.getBalance() + amount);
-//			} else {
-//				recipient.setBalance(recipient.getBalance() - amount);
-//				sender.setBalance(sender.getBalance() + amount);
-//			}
-//
-//		}
-
-//        System.out.println("\nREMOVE TRANSACTION:");
+		System.out.println("\nREMOVE TRANSACTION:");
+		System.out.println("-".repeat(66));
 //        Transaction[] transactions = user1.getList().toArray();
-//        Transaction toRemove = transactions[1];
-//        user1.getList().remove(toRemove.getUUID());
-//        user2.getList().remove(toRemove.getUUID());
+		UUID transToRemove = user1.getTransactions().get(0).getId();
+
+		boolean removed = transactionDao.remove(transToRemove);
+		if (removed) {
+			System.out.println("RemovedTransaction ID: " + transToRemove);
+		} else {
+			System.out.println("Failed");
+		}
+
+		System.out.println("-".repeat(66));
 //        
-//        System.out.println("Charlotte: " + user1 + "\nCharlotte list: \n" + user1.getTransactions());
-//        System.out.println("Nkosinathi: " + user2 + "\nNkosinathi list: \n" + user2.getTransactions());
-//
-//        try {
-//            System.out.println("\nTRY TO REMOVE TRANSACTION WITH WRONG UUID:");
-//            user1.getList().remove(toRemove.getUUID());
-//        } catch (RuntimeException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        try {
-//            System.out.println("\nTRY TO REMOVE TRANSACTION WITH null UUID:");
-//            user2.getList().remove(null);
-//        } catch (RuntimeException e) {
-//            System.out.println(e.getMessage());
-//        }
+		System.out.println("Charlotte: " + user1 + "\nCharlotte list: \n" + user1.getTransactions());
+		System.out.println("-".repeat(166));
+		System.out.println("Nkosinathi: " + user2 + "\nNkosinathi list: \n" + user2.getTransactions());
+		System.out.println("-".repeat(166));
+
+		try {
+			System.out.println("\nTRY TO REMOVE TRANSACTION WITH WRONG UUID:");
+			System.out.println("-".repeat(66));
+			transactionDao.remove(UUID.randomUUID());
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }
