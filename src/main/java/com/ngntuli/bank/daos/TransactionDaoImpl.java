@@ -15,11 +15,11 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	public TransactionDaoImpl() {
 		userDao = new UserDaoImpl();
-		users = userDao.findAll();
+		users = userDao.findAllUsers();
 	}
 
 	@Override
-	public boolean add(Transaction transaction) {
+	public boolean addByTransaction(Transaction transaction) {
 		if (transaction != null) {
 
 			Transaction trans1 = new Transaction(transaction.getId());
@@ -76,7 +76,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public boolean remove(UUID id) {
+	public boolean removeById(UUID id) {
 		if (id != null) {
 			boolean found = false;
 			for (User user : users) {
