@@ -43,6 +43,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public User find(User user) {
+		for (User user2 : users) {
+			if (user2.equals(user)) {
+				return user2;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public List<User> findAll() {
 		if (users.isEmpty()) {
 			return null;
