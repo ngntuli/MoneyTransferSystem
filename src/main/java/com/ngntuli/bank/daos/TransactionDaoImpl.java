@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.ngntuli.bank.models.Transaction;
 import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.utilities.TransferCategory;
+import com.ngntuli.bank.validators.TransactionNotFoundException;
 
 public class TransactionDaoImpl implements TransactionDao {
 	private UserDao userDao;
@@ -77,29 +78,26 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public boolean remove(UUID id) {
 		if (id != null) {
+			boolean found = false;
 			for (User user : users) {
 				List<Transaction> list = user.getTransactions();
 				for (Transaction transaction : list) {
 					if (transaction.getId().equals(id)) {
 						list.remove(transaction);
+						found = true;
 						break;
 					}
 				}
 			}
 
-			return true;
+			if (found) {
+				return true;
+			} else {
+				throw new TransactionNotFoundException("Transaction with UUID: " + id + " Not Found.");
+			}
+
 		}
 		return false;
-	}
-
-	@Override
-	public Transaction[] toArray() {
-		return null;
-	}
-
-	@Override
-	public int size() {
-		return 404;
 	}
 
 }
