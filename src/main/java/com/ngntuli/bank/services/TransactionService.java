@@ -6,7 +6,7 @@ import com.ngntuli.bank.models.Transaction;
 import com.ngntuli.bank.models.User;
 
 public interface TransactionService {
-	boolean createTransactionById(int senderId, int recipientId, int amount);
+	void createTransactionById(int senderId, int recipientId, int amount);
 
 	Transaction[] getTransactionsByUserId(int userId);
 
