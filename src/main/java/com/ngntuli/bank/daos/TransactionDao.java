@@ -9,7 +9,4 @@ public interface TransactionDao {
 
 	boolean remove(UUID id);
 
-	Transaction[] toArray();
-
-	int size();
 }
