@@ -74,31 +74,12 @@ public class Transaction {
 			trans.append(", OUTCOME, ");
 			trans.append(this.id);
 			trans.append("]\n");
-
-			trans.append("Transaction [");
-			trans.append(recipient.getName());
-			trans.append(" -> ");
-			trans.append(sender.getName());
-			trans.append(", +");
-			trans.append(this.amount);
-			trans.append(", INCOME, ");
-			trans.append(this.id);
-			trans.append("]\n");
 		} else {
-			trans.append("Transaction [");
-			trans.append(recipient.getName());
-			trans.append(" -> ");
-			trans.append(sender.getName());
-			trans.append(", -");
-			trans.append(this.amount);
-			trans.append(", OUTCOME, ");
-			trans.append(this.id);
-			trans.append("]\n");
 
 			trans.append("Transaction [");
-			trans.append(sender.getName());
-			trans.append(" -> ");
 			trans.append(recipient.getName());
+			trans.append(" -> ");
+			trans.append(sender.getName());
 			trans.append(", +");
 			trans.append(this.amount);
 			trans.append(", INCOME, ");
