@@ -5,10 +5,17 @@ import java.util.List;
 import java.util.UUID;
 
 import com.ngntuli.bank.models.Transaction;
+import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.utilities.TransferCategory;
 
 public class TransactionDaoImpl implements TransactionDao {
-	private static final List<Transaction> transactions = new LinkedList<>();
+	private UserDao userDao;
+	private List<User> users = new LinkedList<>();
+
+	public TransactionDaoImpl() {
+		userDao = new UserDaoImpl();
+		users = userDao.findAll();
+	}
 
 	@Override
 	public boolean add(Transaction transaction) {
@@ -57,8 +64,9 @@ public class TransactionDaoImpl implements TransactionDao {
 
 				trans2.getRecipient().setBalance(trans2.getRecipient().getBalance() - trans2.getAmount());
 				trans2.getRecipient().getTransactions().add(trans2);
+
 			}
-			transactions.add(transaction);
+
 			return true;
 		}
 
@@ -69,38 +77,29 @@ public class TransactionDaoImpl implements TransactionDao {
 	@Override
 	public boolean remove(UUID id) {
 		if (id != null) {
-			for (int i = 0; i < transactions.size(); i++) {
-				if (transactions.get(i).getId().equals(id)) {
-					transactions.remove(i);
-					return true;
+			for (User user : users) {
+				List<Transaction> list = user.getTransactions();
+				for (Transaction transaction : list) {
+					if (transaction.getId().equals(id)) {
+						list.remove(transaction);
+						break;
+					}
 				}
 			}
+
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public Transaction[] toArray() {
-		return (Transaction[]) transactions.toArray();
+		return null;
 	}
 
 	@Override
 	public int size() {
-		return transactions.size();
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder trans = new StringBuilder();
-		trans.append("TransactionsList [size: ");
-		trans.append(size());
-		trans.append("\n");
-		for (Transaction transaction : transactions) {
-			trans.append(transaction);
-		}
-		trans.append("]\n");
-
-		return trans.toString();
+		return 404;
 	}
 
 }
