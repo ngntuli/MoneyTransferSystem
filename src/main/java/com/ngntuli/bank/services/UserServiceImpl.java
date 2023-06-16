@@ -1,5 +1,7 @@
 package com.ngntuli.bank.services;
 
+import java.util.List;
+
 import com.ngntuli.bank.daos.UserDaoImpl;
 import com.ngntuli.bank.models.User;
 
@@ -12,12 +14,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int getBalance(User user) {
-		User userFound = userDao.findByUser(user);
-		if (userFound != null) {
-			return userFound.getBalance();
-		}
-		return Integer.MIN_VALUE;
+	public User getUser(User user) {
+		return userDao.findByUser(user);
+	}
+
+	@Override
+	public List<User> listAllUser() {
+		return userDao.findAllUsers();
 	}
 
 }
