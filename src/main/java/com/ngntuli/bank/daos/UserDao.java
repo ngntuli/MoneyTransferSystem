@@ -1,5 +1,7 @@
 package com.ngntuli.bank.daos;
 
+import java.util.List;
+
 import com.ngntuli.bank.models.User;
 
 public interface UserDao {
@@ -9,7 +11,7 @@ public interface UserDao {
 
 	User find(String name);
 
-	User findAll();
+	List<User> findAll();
 
 	int size();
 }
