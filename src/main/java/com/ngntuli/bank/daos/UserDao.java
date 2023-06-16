@@ -11,6 +11,8 @@ public interface UserDao {
 
 	User find(String name);
 
+	User find(User user);
+
 	List<User> findAll();
 
 	int size();
