@@ -1,9 +1,14 @@
 package com.ngntuli.bank.services;
 
+import java.util.List;
+
 import com.ngntuli.bank.models.User;
 
 public interface UserService {
 	boolean createUser(User user);
 
-	int getBalance(User user);
+	User getUser(User user);
+
+	List<User> listAllUser();
+
 }
