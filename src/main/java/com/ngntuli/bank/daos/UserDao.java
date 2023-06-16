@@ -9,5 +9,7 @@ public interface UserDao {
 
 	User find(String name);
 
+	User findAll();
+
 	int size();
 }
