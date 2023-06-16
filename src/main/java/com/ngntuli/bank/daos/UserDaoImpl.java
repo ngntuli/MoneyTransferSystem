@@ -11,8 +11,8 @@ public class UserDaoImpl implements UserDao {
 	private static final List<User> users = new ArrayList<>();
 
 	@Override
-	public boolean add(User user) {
-		User userFound = find(user.getName());
+	public boolean addByUser(User user) {
+		User userFound = findByName(user.getName());
 		if (userFound == null) {
 			users.add(user);
 			return true;
@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User find(int id) {
+	public User findById(int id) {
 		for (User user : users) {
 			if (user.getId() == id) {
 				return user;
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User find(String name) {
+	public User findByName(String name) {
 		for (User user : users) {
 			if (user.getName().equals(name)) {
 				return user;
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User find(User user) {
+	public User findByUser(User user) {
 		for (User user2 : users) {
 			if (user2.equals(user)) {
 				return user2;
@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAllUsers() {
 		if (users.isEmpty()) {
 			return null;
 		}
@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int size() {
+	public int countsAllUsers() {
 		return users.size();
 	}
 
