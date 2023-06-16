@@ -10,13 +10,13 @@ public class Transaction {
 	private User sender;
 	private User recipient;
 	private TransferCategory transferCategory;
-	private Integer amount;
+	private int amount;
 
 	public Transaction(UUID id) {
 		this.id = id;
 	}
 
-	public Transaction(User sender, User recipient, TransferCategory transferCategory, Integer amount) {
+	public Transaction(User sender, User recipient, TransferCategory transferCategory, int amount) {
 		this.id = UUID.randomUUID();
 		this.sender = sender;
 		this.recipient = recipient;
@@ -52,11 +52,11 @@ public class Transaction {
 		this.transferCategory = transferCategory;
 	}
 
-	public Integer getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
