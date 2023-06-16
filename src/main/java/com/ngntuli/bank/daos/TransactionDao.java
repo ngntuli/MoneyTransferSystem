@@ -5,8 +5,8 @@ import java.util.UUID;
 import com.ngntuli.bank.models.Transaction;
 
 public interface TransactionDao {
-	boolean add(Transaction transaction);
+	boolean addByTransaction(Transaction transaction);
 
-	boolean remove(UUID id);
+	boolean removeByIdTransaction(UUID id);
 
 }
