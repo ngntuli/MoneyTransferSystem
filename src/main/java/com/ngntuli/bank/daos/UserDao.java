@@ -13,7 +13,7 @@ public interface UserDao {
 
 	User findByUser(User user);
 
-	List<User> listAllUsers();
+	List<User> findAllUsers();
 
-	int size();
+	int countsAllUsers();
 }
