@@ -43,6 +43,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public List<User> findAll() {
+		if (users.isEmpty()) {
+			return null;
+		}
+		return users;
+	}
+
+	@Override
 	public int size() {
 		return users.size();
 	}
