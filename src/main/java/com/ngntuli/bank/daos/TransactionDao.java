@@ -7,6 +7,6 @@ import com.ngntuli.bank.models.Transaction;
 public interface TransactionDao {
 	boolean addByTransaction(Transaction transaction);
 
-	boolean removeByIdTransaction(UUID id);
+	boolean removeById(UUID id);
 
 }
