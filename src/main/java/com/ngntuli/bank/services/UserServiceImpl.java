@@ -6,7 +6,7 @@ import com.ngntuli.bank.daos.UserDaoImpl;
 import com.ngntuli.bank.models.User;
 
 public class UserServiceImpl implements UserService {
-	private UserDaoImpl userDao = new UserDaoImpl();
+	private final UserDaoImpl userDao = new UserDaoImpl();
 
 	@Override
 	public boolean createUser(User user) {
