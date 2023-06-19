@@ -10,5 +10,5 @@ public interface TransactionService {
 
 	Transaction[] getTransactionsByUserId(int userId);
 
-	boolean removeTransactionByUserId(int userId, UUID id);
+	boolean removeTransactionById(UUID id);
 }
