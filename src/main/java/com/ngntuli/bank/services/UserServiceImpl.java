@@ -39,7 +39,9 @@ public class UserServiceImpl implements UserService {
 
 				List<Transaction> transactions = user.getTransactions();
 				for (Transaction transaction : transactions) {
-					if (transaction.getId().equals(id)) {
+
+					UUID id2 = transaction.getId();
+					if (id2.equals(id)) {
 						user.getTransactions().remove(transaction);
 						break;
 					}
