@@ -11,7 +11,7 @@ public class User {
 	private int id;
 	private String name;
 	private int balance;
-	private static final List<Transaction> transactions = new LinkedList<>();;
+	private static final List<Transaction> transactions = new LinkedList<>();
 
 	public User(String name, int balance) {
 		this.id = UserIdsGenerator.getInstance().generateId();
