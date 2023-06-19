@@ -19,60 +19,15 @@ public class TransactionDaoImpl implements TransactionDao {
 	}
 
 	@Override
-	public boolean addByTransaction(Transaction transaction) {
-		if (transaction != null) {
-
-			Transaction trans1 = new Transaction(transaction.getId());
-			Transaction trans2 = new Transaction(transaction.getId());
-
-			if ((transaction.getTransferCategory().equals(TransferCategory.DEBIT)
-					&& transaction.getSender().getBalance() < transaction.getAmount())
-					|| (transaction.getTransferCategory().equals(TransferCategory.CREDIT)
-							&& transaction.getRecipient().getBalance() < transaction.getAmount())) {
-				System.err.println("Transaction [id=" + transaction.getId() + "] Failed!\n");
-
-			} else if (transaction.getTransferCategory().equals(TransferCategory.DEBIT)) {
-
-				trans1.setSender(transaction.getSender());
-				trans1.setRecipient(transaction.getRecipient());
-				trans1.setAmount(transaction.getAmount());
-				trans1.setTransferCategory(TransferCategory.DEBIT);
-
-				trans2.setSender(transaction.getSender());
-				trans2.setRecipient(transaction.getRecipient());
-				trans2.setAmount(transaction.getAmount());
-				trans2.setTransferCategory(TransferCategory.CREDIT);
-
-				trans1.getSender().setBalance(trans1.getSender().getBalance() - trans1.getAmount());
-				trans1.getSender().getTransactions().add(trans1);
-
-				trans2.getRecipient().setBalance(trans2.getRecipient().getBalance() + trans2.getAmount());
-				trans2.getRecipient().getTransactions().add(trans2);
-
-			} else {
-				trans1.setSender(transaction.getSender());
-				trans1.setRecipient(transaction.getRecipient());
-				trans1.setAmount(transaction.getAmount());
-				trans1.setTransferCategory(TransferCategory.CREDIT);
-
-				trans2.setSender(transaction.getSender());
-				trans2.setRecipient(transaction.getRecipient());
-				trans2.setAmount(transaction.getAmount());
-				trans2.setTransferCategory(TransferCategory.DEBIT);
-
-				trans1.getSender().setBalance(trans1.getSender().getBalance() + trans1.getAmount());
-				trans1.getSender().getTransactions().add(trans1);
-
-				trans2.getRecipient().setBalance(trans2.getRecipient().getBalance() - trans2.getAmount());
-				trans2.getRecipient().getTransactions().add(trans2);
-
-			}
+	public boolean addByUserTransaction(User sender, Transaction senderTransaction, User recipient,
+			Transaction recipientTransaction) {
+		if (senderTransaction != null && recipientTransaction != null) {
+			sender.getTransactions().add(senderTransaction);
+			recipient.getTransactions().add(recipientTransaction);
 
 			return true;
 		}
-
 		return false;
-
 	}
 
 	@Override
