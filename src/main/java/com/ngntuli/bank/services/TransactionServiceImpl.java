@@ -45,8 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public boolean removeTransactionById(UUID id) {
-		userService.removeTransactionById(id);
-		return false;
+		return userService.removeTransactionById(id);
 	}
 
 }
