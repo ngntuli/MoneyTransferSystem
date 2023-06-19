@@ -1,20 +1,19 @@
 package com.ngntuli.bank.daos;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.ngntuli.bank.databases.DataStore;
 import com.ngntuli.bank.models.User;
-import com.ngntuli.bank.validators.UserAlreadyExistsException;
 
 public class UserDaoImpl implements UserDao {
 
-	private static final List<User> users = new ArrayList<>();
+	private static final List<User> USERS = DataStore.getInstance().getUsers();
 
 	@Override
 	public boolean addByUser(User user) {
 		User userFound = findByName(user.getName());
 		if (userFound == null) {
-			users.add(user);
+			USERS.add(user);
 			return true;
 		} else {
 			return false;
@@ -24,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findById(int id) {
-		for (User user : users) {
+		for (User user : USERS) {
 			if (user.getId() == id) {
 				return user;
 			}
@@ -34,7 +33,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findByName(String name) {
-		for (User user : users) {
+		for (User user : USERS) {
 			if (user.getName().equals(name)) {
 				return user;
 			}
@@ -44,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findByUser(User user) {
-		for (User user2 : users) {
+		for (User user2 : USERS) {
 			if (user2.equals(user)) {
 				return user2;
 			}
@@ -54,15 +53,15 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> findAllUsers() {
-		if (users.isEmpty()) {
+		if (USERS.isEmpty()) {
 			return null;
 		}
-		return users;
+		return USERS;
 	}
 
 	@Override
 	public int countsAllUsers() {
-		return users.size();
+		return USERS.size();
 	}
 
 }
