@@ -12,16 +12,16 @@ public class Transaction {
 	private TransferCategory transferCategory;
 	private int amount;
 
-	public Transaction(UUID id) {
-		this.id = id;
-	}
-
 	public Transaction(User sender, User recipient, TransferCategory transferCategory, int amount) {
-		this.id = UUID.randomUUID();
 		this.sender = sender;
 		this.recipient = recipient;
 		this.transferCategory = transferCategory;
 		this.amount = amount;
+	}
+
+	public Transaction(UUID id, User sender, User recipient, TransferCategory transferCategory, int amount) {
+		this(sender, recipient, transferCategory, amount);
+		this.id = id;
 	}
 
 	public UUID getId() {
