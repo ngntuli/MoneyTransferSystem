@@ -3,15 +3,13 @@ package com.ngntuli.bank.models;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.ngntuli.bank.daos.TransactionDao;
-import com.ngntuli.bank.daos.TransactionDaoImpl;
 import com.ngntuli.bank.databases.UserIdsGenerator;
 
 public class User {
 	private int id;
 	private String name;
 	private int balance;
-	private static final List<Transaction> transactions = new LinkedList<>();
+	private static final List<Transaction> TRANSACTIONS = new LinkedList<>();
 
 	public User(String name, int balance) {
 		this.id = UserIdsGenerator.getInstance().generateId();
@@ -45,7 +43,7 @@ public class User {
 	}
 
 	public List<Transaction> getTransactions() {
-		return transactions;
+		return TRANSACTIONS;
 	}
 
 	@Override
