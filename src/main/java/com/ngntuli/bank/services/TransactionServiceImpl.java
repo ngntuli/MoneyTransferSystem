@@ -1,5 +1,6 @@
 package com.ngntuli.bank.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.ngntuli.bank.daos.TransactionDao;
@@ -39,8 +40,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public Transaction[] getTransactionsByUserId(int userId) {
-		return (Transaction[]) userService.getUserById(userId).getTransactions().toArray();
+	public List<Transaction> getTransactionsByUserId(int userId) {
+		return userService.getUserById(userId).getTransactions();
 	}
 
 	@Override
