@@ -33,17 +33,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int getBalanceByUserId(int id) {
-		User user = getUserById(id);
-		if (user != null) {
-			return user.getBalance();
-		} else {
-			return Integer.MIN_VALUE;
-		}
-
-	}
-
-	@Override
 	public List<User> listAllUser() {
 		return userDao.findAllUsers();
 	}
