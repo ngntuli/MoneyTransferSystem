@@ -12,8 +12,6 @@ public interface UserService {
 
 	User getUserById(int id);
 
-	int getBalanceByUserId(int id);
-
 	List<User> listAllUser();
 
 	boolean removeTransactionById(UUID id);
