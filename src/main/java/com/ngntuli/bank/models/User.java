@@ -14,7 +14,7 @@ public class User {
 	public User(String name, int balance) {
 		this.id = UserIdsGenerator.getInstance().generateId();
 		this.name = name;
-		setBalance(balance);
+		this.balance = balance;
 	}
 
 	public int getId() {
@@ -34,12 +34,7 @@ public class User {
 	}
 
 	public void setBalance(int balance) {
-		if (balance < 0) {
-			this.balance = 0;
-			System.err.println("Cannot Set Negative Balance: " + balance + " for user: " + this.name);
-		} else {
-			this.balance = balance;
-		}
+		this.balance = balance;
 	}
 
 	public List<Transaction> getTransactions() {
