@@ -1,7 +1,9 @@
 package com.ngntuli.bank.controllers;
 
+import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.services.UserService;
 import com.ngntuli.bank.services.UserServiceImpl;
+import com.ngntuli.bank.validators.UserNotFoundException;
 
 public class UserController {
 	private static UserService userService = new UserServiceImpl();
@@ -15,12 +17,12 @@ public class UserController {
 		}
 	}
 
-	public String getBalance(int UserId) {
-		int isBalanced = userService.getBalanceByUserId(UserId);
-		if (isBalanced != Integer.MIN_VALUE) {
-			return ("Success: your balance is: " + isBalanced);
+	public String getBalance(int userId) {
+		User user = userService.getUserById(userId);
+		if (user != null) {
+			return (user.getName() + " - " + user.getBalance());
 		} else {
-			return "Failed: failed to get balance user";
+			throw new UserNotFoundException("Error: user with ID: " + userId + " does not exists: ");
 		}
 	}
 
