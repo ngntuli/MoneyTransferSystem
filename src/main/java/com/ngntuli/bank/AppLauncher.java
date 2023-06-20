@@ -1,7 +1,11 @@
 package com.ngntuli.bank;
 
-public class AppLauncher {
-	public static void main(String[] args) {
+import com.ngntuli.bank.views.View;
 
+public class AppLauncher {
+	private static View view = new View();
+
+	public static void main(String[] args) {
+		view.menu();
 	}
 }
