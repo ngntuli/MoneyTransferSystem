@@ -26,6 +26,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public int getBalanceByUserId(int id) {
+		User user = getUserById(id);
+		return user.getBalance();
+	}
+
+	@Override
 	public List<User> listAllUser() {
 		return userDao.findAllUsers();
 	}
