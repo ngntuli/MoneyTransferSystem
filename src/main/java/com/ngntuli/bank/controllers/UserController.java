@@ -1,5 +1,6 @@
 package com.ngntuli.bank.controllers;
 
+import com.ngntuli.bank.databases.UserIdsGenerator;
 import com.ngntuli.bank.models.User;
 import com.ngntuli.bank.services.UserService;
 import com.ngntuli.bank.services.UserServiceImpl;
@@ -11,9 +12,9 @@ public class UserController {
 	public String create(String name, int balance) {
 		boolean isCreated = userService.createUser(name, balance);
 		if (isCreated) {
-			return "Success: user is created successful";
+			return "User with id = " + UserIdsGenerator.getInstance().getId() + " is added\n";
 		} else {
-			return "Failed: failed to create user";
+			return "Error: Failed to create user";
 		}
 	}
 
