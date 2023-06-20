@@ -11,8 +11,13 @@ public class UserServiceImpl implements UserService {
 	private final UserDaoImpl userDao = new UserDaoImpl();
 
 	@Override
-	public boolean createUser(User user) {
-		return userDao.addByUser(user);
+	public boolean createUser(String name, int balance) {
+		if (name.length() < 3 || balance < 50) {
+			return false;
+		} else {
+			return userDao.addByUser(new User(name, balance));
+		}
+
 	}
 
 	@Override
