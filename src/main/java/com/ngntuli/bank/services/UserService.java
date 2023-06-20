@@ -18,4 +18,6 @@ public interface UserService {
 
 	boolean removeTransactionById(UUID id);
 
+	int countUsers();
+
 }
