@@ -6,7 +6,7 @@ import java.util.List;
 import com.ngntuli.bank.models.User;
 
 public class DataStore {
-	private static final List<User> USERS = new ArrayList();
+	private static final List<User> USERS = new ArrayList<User>();
 	private static final DataStore instance = new DataStore();
 
 	private DataStore() {
