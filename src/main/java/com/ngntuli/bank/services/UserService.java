@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.ngntuli.bank.models.User;
 
 public interface UserService {
-	boolean createUser(User user);
+	boolean createUser(String name, int balance);
 
 	User getUser(User user);
 
