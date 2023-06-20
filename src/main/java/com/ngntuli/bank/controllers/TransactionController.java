@@ -1,5 +1,6 @@
 package com.ngntuli.bank.controllers;
 
+import com.ngntuli.bank.models.Transaction;
 import com.ngntuli.bank.services.TransactionService;
 import com.ngntuli.bank.services.TransactionServiceImpl;
 
@@ -11,7 +12,7 @@ public class TransactionController {
 		return "Success: transaction is successfully created";
 	}
 
-	public String list(int userId) {
-		return trService.getTransactionsByUserId(userId).toString();
+	public Transaction[] list(int userId) {
+		return trService.getTransactionsByUserId(userId);
 	}
 }
