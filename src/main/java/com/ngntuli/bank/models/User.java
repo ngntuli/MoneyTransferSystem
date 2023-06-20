@@ -9,7 +9,7 @@ public class User {
 	private int id;
 	private String name;
 	private int balance;
-	private static final List<Transaction> TRANSACTIONS = new LinkedList<>();
+	private final List<Transaction> transactions = new LinkedList<>();
 
 	public User(String name, int balance) {
 		this.id = UserIdsGenerator.getInstance().generateId();
@@ -43,7 +43,7 @@ public class User {
 	}
 
 	public List<Transaction> getTransactions() {
-		return TRANSACTIONS;
+		return transactions;
 	}
 
 	@Override
