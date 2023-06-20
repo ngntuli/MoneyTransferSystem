@@ -77,9 +77,9 @@ public class Transaction {
 		} else {
 
 			trans.append("Transaction [");
-			trans.append(recipient.getName());
-			trans.append(" -> ");
 			trans.append(sender.getName());
+			trans.append(" -> ");
+			trans.append(recipient.getName());
 			trans.append(", +");
 			trans.append(this.amount);
 			trans.append(", INCOME, ");
