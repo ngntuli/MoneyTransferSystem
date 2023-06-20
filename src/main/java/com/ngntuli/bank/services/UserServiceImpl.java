@@ -33,7 +33,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int getBalanceByUserId(int id) {
 		User user = getUserById(id);
-		return user.getBalance();
+		if (user != null) {
+			return user.getBalance();
+		} else {
+			return Integer.MIN_VALUE;
+		}
+
 	}
 
 	@Override
