@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.ngntuli.bank.daos.UserDaoImpl;
 import com.ngntuli.bank.models.Transaction;
 import com.ngntuli.bank.models.User;
+import com.ngntuli.bank.validators.IllegalUserException;
 
 public class UserServiceImpl implements UserService {
 	private final UserDaoImpl userDao = new UserDaoImpl();
@@ -13,7 +14,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean createUser(String name, int balance) {
 		if (name.length() < 3 || balance < 50) {
-			return false;
+			throw new IllegalUserException(
+					"Error: cannot create user,\n name must be more than 3 characters, \nand balance must be > 50");
 		} else {
 			return userDao.addByUser(new User(name, balance));
 		}
