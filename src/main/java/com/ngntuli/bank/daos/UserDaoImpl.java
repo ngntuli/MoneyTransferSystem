@@ -11,8 +11,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean addByUser(User user) {
-		User userFound = findByName(user.getName());
-		if (userFound == null) {
+		if (user != null) {
 			USERS.add(user);
 			return true;
 		} else {
